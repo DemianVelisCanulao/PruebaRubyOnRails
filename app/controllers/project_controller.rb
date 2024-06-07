@@ -12,12 +12,14 @@ class ProjectController < ApplicationController
 
     def new
         @project = Project.new 
+        @user_projects = current_user.project
     end
 
     def create 
-        @project = current_user.projects.build(project_params)
-        if project.save 
-            redirect_to @project, notice: 'Proyecto creado exitosamente.'
+        @projects = current_user.project.build(project_params)
+        
+        if @projects.save 
+            redirect_to @projects, notice: 'Proyecto creado exitosamente.'
         else
             render:new
         end        
@@ -36,13 +38,13 @@ class ProjectController < ApplicationController
 
     def destroy
         @project.destroy
-        redirect_to projects_url, notice: 'Proyecto elimininado exitosamente.'
+        redirect_to project_url, notice: 'Proyecto elimininado exitosamente.'
     end
 
     private 
 
     def set_project
-        @project = current_user.projects.find(params[:id])
+        @project = current_user.project.find(params[:id])
     end
 
     def project_params
