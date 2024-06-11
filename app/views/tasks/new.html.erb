@@ -1,0 +1,10 @@
+<h1>Nueva tarea</h1>
+
+<%= form_with(model: [@project, @task], url: project_tasks_path(@project)) do  |f| %>
+   
+    <%= f.label :title, 'Título' %>
+    <%= f.text_field :title, :id => "task_title" %>
+
+    <%= f.submit 'Enviar', disable_with: 'Enviando...' %>
+<% end %>
+

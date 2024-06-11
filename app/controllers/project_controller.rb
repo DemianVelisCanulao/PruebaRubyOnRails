@@ -7,41 +7,41 @@ class ProjectController < ApplicationController
     end
 
     def show
-
+        @tasks = @project.task
     end
 
     def new
-        @project = Project.new 
+        @project = Project.new
         @user_projects = current_user.project
     end
 
-    def create 
+    def create
         @projects = current_user.project.build(project_params)
-        
-        if @projects.save 
+
+        if @projects.save
             redirect_to @projects, notice: 'Proyecto creado exitosamente.'
         else
             render:new
-        end        
+        end
     end
 
     def edit
     end
-    
+
     def update
         if @project.update(project_params)
             redirect_to @project, notice: 'Proyecto actualizado exitosamente.'
         else
             render:edit
-        end    
+        end
     end
 
     def destroy
         @project.destroy
-        redirect_to project_url, notice: 'Proyecto elimininado exitosamente.'
+        redirect_to project_url, notice: 'Proyecto eliminado exitosamente.'
     end
 
-    private 
+    private
 
     def set_project
         @project = current_user.project.find(params[:id])

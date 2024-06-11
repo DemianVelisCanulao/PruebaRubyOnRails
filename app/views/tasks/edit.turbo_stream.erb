@@ -1,0 +1,10 @@
+<turbo-stream action="replace" target="task_<%= @task.id %>">
+  <template>
+    <div id="task_<%= @task.id %>" data-controller="task">
+      <%= form_with model: [@project, @task], data: { turbo_frame: "task_frame_#{task.id}" } do |f| %>
+        <%= f.text_field :title, value: @task.title, data: { target: "task.title", action: "blur->task#save" } %>
+        <%= link_to 'Editar', edit_project_task_path(@project, @task), remote: true, data: { turbo_frame: "task_frame_#{task.id}" }, class: "hidden" %>
+      <% end %>
+    </div>
+  </template>
+</turbo-stream>

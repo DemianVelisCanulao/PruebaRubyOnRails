@@ -1,0 +1,15 @@
+<h1>Editando el proyecto: </h1>
+
+
+<%= form_with model: @project, local: true do |f| %>
+  
+
+  <div class="field">
+    <%= f.label :title, 'Título' %>
+    <%= f.text_field :title, class: ''%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Guardar Cambios' %>
+  </div>
+<% end %>

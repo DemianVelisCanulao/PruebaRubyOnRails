@@ -1,0 +1,8 @@
+<h1>Editar Tarea</h1>
+
+<%= form_with model: [@project, @task], local: true do |f| %>
+  <%= f.label :title, 'Título' %>
+  <%= f.text_field :title %>
+
+  <%= f.submit 'Guardar' %>
+<% end %>

@@ -1,0 +1,25 @@
+
+<%= link_to 'Home', root_path, class: 'link' %>
+<h1>Viendo el proyecto <%= @project.title %></h1>
+
+<b>Título: </b>
+<i><%= @project.title %></i>
+
+<ul>
+    <% @tasks.each do |task| %>
+      <div id="task_<%= task.id %>" data-controller="task">
+        <%= turbo_frame_tag "task_frame_#{task.id}" do %>
+          <div class="task-container">
+            <%= form_with(model: [@project, task], data: { turbo_frame: "task_frame_#{task.id}" }) do |f| %>
+              <%= f.text_field :title, value: task.title, data: { turbo_target: "task.title", turbo_action: "blur->task#save" } %>
+              
+              <%= link_to 'Eliminar', project_task_path(@project, task), remote: true, data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" } %>
+            <% end %>
+          </div>
+          
+        <% end %>
+      </div>
+    <% end %>
+</ul>
+
+<%= link_to 'Crear nueva tarea', new_project_task_path(@project), class: 'link' %>
