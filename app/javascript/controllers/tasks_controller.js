@@ -1,18 +1,37 @@
-// app/javascript/controllers/tasks_controller.js
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+
+  toggleStyle(event) {
+    const checkbox = event.target;
+    const titleInput = checkbox.closest("form").querySelector(".task-title");
+    console.log(titleInput)
+    if (titleInput) {
+      if (checkbox.checked) {
+        titleInput.classList.add("completed");
+        titleInput.readOnly = true;
+      } else {
+        titleInput.classList.remove("completed");
+        titleInput.readOnly = false;
+      }
+    }
+
+    this.save(); // Llama a la función save después de cambiar el estilo
+  }
+
   save() {
-    console.log("Guardando tarea...") // Verifica si se activa correctamente al desenfocar el campo
-    const form = this.element
+
+    const form = event.target.closest("form");
 
     fetch(form.action, {
       method: form.method,
-      headers: { "Content-Type": "application/json", "Accept": "text/vnd.turbo-stream.html" },
+      headers: {"Accept": "text/vnd.turbo-stream.html" },
       body: new FormData(form)
     })
     .then(response => response.text())
     .then(html => Turbo.renderStreamMessage(html))
     .catch(error => console.error('Error:', error))
   }
+
+
 }

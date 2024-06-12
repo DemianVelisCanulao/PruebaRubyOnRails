@@ -13,41 +13,56 @@
  *= require_tree .
  *= require_self
  */
- @import "font-awesome";
- @import "custom_styles";
- body{
+@import "font-awesome";
+@import "custom_styles";
+body{
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: linear-gradient(to right, #832161, #f0a6ca);
- }
+    background-color: rgba(255, 218, 185, 0.5);
+    color: #555555;
+    font-family: Arial, sans-serif;
+}
 
- .main-container{
-    width: 80%;
-    max-width: 600px; /* Ancho máximo del contenedor */
-    padding: 20px;
-    background-color: #ffffff; /* Color de fondo del contenedor */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para resaltar el contenedor */
-    text-align: center; /* Centrar el contenido dentro del contenedor */
+h1{
+    color: #4B0082;
 }
 
 ul {
-    list-style-type: none; /* Quitar los puntos de la lista */
+    list-style-type: none; 
     padding: 0;
 }
 
 li {
     padding: 10px 0;
-    border-bottom: 1px solid #dddddd; /* Línea separadora entre elementos de la lista */
+    border-bottom: 1px solid #dddddd; 
 }
 
-a{
+a {
+    display: inline-block;
     text-decoration: none;
+    border-bottom: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-right: 10px;
+  }
+
+.main-container{
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    border-color: rgba(255, 182, 193, 0.8);
+    color: rgba(85, 85, 85, 1);
 }
+
 
 .alert{
     position: relative;
@@ -61,4 +76,22 @@ a{
     color: #004085;
     background-color: #cce5ff;
     border-color: #b8daff;
+}
+
+.button-link {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #90EE90; 
+    color: #FFFFFF; 
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button-link:hover {
+background-color: #6B8E23; 
+color: #FFFFFF; 
 }

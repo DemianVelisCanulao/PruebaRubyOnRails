@@ -1,25 +1,26 @@
-
+<div id="flash_messages">
+  <!-- Los mensajes flash se agregarán aquí -->
+</div>
 <%= link_to 'Home', root_path, class: 'link' %>
-<h1>Viendo el proyecto <%= @project.title %></h1>
-
-<b>Título: </b>
-<i><%= @project.title %></i>
+<b>Mi proyecto: </b>
+<h2><i><%= @project.title %></i></h2>
 
 <ul>
     <% @tasks.each do |task| %>
-      <div id="task_<%= task.id %>" data-controller="task">
-        <%= turbo_frame_tag "task_frame_#{task.id}" do %>
+      <div id="task_<%= task.id %>" data-controller="tasks">
+        <%= turbo_frame_tag "tasks_frame_#{task.id}" do %>
           <div class="task-container">
-            <%= form_with(model: [@project, task], data: { turbo_frame: "task_frame_#{task.id}" }) do |f| %>
-              <%= f.text_field :title, value: task.title, data: { turbo_target: "task.title", turbo_action: "blur->task#save" } %>
-              
-              <%= link_to 'Eliminar', project_task_path(@project, task), remote: true, data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" } %>
-            <% end %>
+              <%= form_with(model: [@project, task], data: { turbo_frame: "task" }) do |f| %>
+                  <%= f.check_box :completed, class: 'styled-checkbox', data: { action: "change->tasks#toggleStyle", target: "task.checkbox", url: project_task_path(@project, task), name: "task[completed]", task_id: task.id} %>
+                  <%= f.text_field :title, value: task.title, class: "task-title #{'completed' if task.completed?}", readonly: task.completed?, data: { target: "task.title", action: "blur->tasks#save" } %>
+                  
+                  <%= link_to 'Eliminar', project_task_path(@project, task), class: 'delete-link', remote: true, data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" } %>
+              <% end %>
           </div>
           
-        <% end %>
+      <% end %>
       </div>
     <% end %>
 </ul>
 
-<%= link_to 'Crear nueva tarea', new_project_task_path(@project), class: 'link' %>
+<%= link_to 'Crear nueva tarea', new_project_task_path(@project), class: 'button-link' %>

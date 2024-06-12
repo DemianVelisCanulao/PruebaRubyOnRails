@@ -1,8 +1,6 @@
 class TasksController < ApplicationController
-  before_action do
-    I18n.locale = :es # Or whatever logic you use to choose.
-  end
-    before_action :set_project
+
+  before_action :set_project
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def create
@@ -43,7 +41,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to @project, notice: 'task eliminada exitosamente.'
+    render turbo_stream: [
+      turbo_stream.remove(@task),
+      turbo_stream.append('flash_messages', partial: 'shared/flash_message', locals: { message: 'La tarea ha sido eliminada.' })
+    ]
   end
 
   private

@@ -1,10 +1,13 @@
-<h1>Crendo nuevo Proyecto</h1>
+<%= link_to root_path, class: "link" do %>
+  <i class="fas fa-arrow-left"></i> Volver
+<% end %>
+<h1>Nuevo Proyecto</h1>
 
 <%= form_with model: @project, url: create_project_path, remote: true  do |f| %>
    
     <%= f.label :title, 'Título' %>
     <%= f.text_field :title %>
 
-    <%= f.submit 'Enviar', disable_with: 'Enviando...' %>
+    <%= f.submit 'Guardar', disable_with: 'Enviando...' %>
 <% end %>
 

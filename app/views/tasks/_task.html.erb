@@ -1,0 +1,13 @@
+<div id="task_<%= task.id %>" data-controller="tasks">
+    <%= turbo_frame_tag "tasks_frame_#{task.id}" do %>
+        <div class="task-container">
+            <%= form_with(model: [@project, task], data: { turbo_frame: "task" }) do |f| %>
+                <%= f.check_box :completed, class: 'styled-checkbox', data: { action: "change->tasks#toggleStyle", target: "task.checkbox", url: project_task_path(@project, task), name: "task[completed]", task_id: task.id} %>
+                <%= f.text_field :title, value: task.title, class: "task-title #{'completed' if task.completed?}",readonly: task.completed?,  data: { target: "task.title", action: "blur->tasks#save" } %>
+                
+                <%= link_to 'Eliminar', project_task_path(@project, task), class: 'delete-link', remote: true, data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" } %>
+            <% end %>
+        </div>
+        
+    <% end %>
+</div>

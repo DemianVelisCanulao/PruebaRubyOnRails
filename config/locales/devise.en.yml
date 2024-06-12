@@ -71,6 +71,10 @@ es:
       not_found: "no encontrado"
       already_confirmed: "ya fue confirmada. Intenta ingresar."
       not_locked: "no ha sido bloqueada"
+      blank: " Este campo no puede estar en blanco"
+      too_short: "es demasiado corto (el mínimo es %{count} caracteres)"
+      confirmation: "no coincide con la contraseña"
+      invalid: "Debe ingresar un formato válido"
       not_saved:
         one: "Ha habido 1 error:"
         other: "Han habido %{count} errores:"
