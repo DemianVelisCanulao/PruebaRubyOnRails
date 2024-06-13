@@ -38,3 +38,6 @@ Instalar dependecias de Ruby:
 ```bash
 rails server
 ```
+## CONSIDERACIONES IMPORTANTES
+
+Si experimentas un error al intentar desplegar el servidor local, te recomiendo borrar el caché de tu navegador:

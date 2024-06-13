@@ -7,7 +7,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
+  host: 
   username: 
   password: 
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -27,5 +27,5 @@ test:
 production:
   <<: *default
   database: appRailsTest
-  username: postgres
+  username: 
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
