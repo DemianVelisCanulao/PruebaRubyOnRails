@@ -12,18 +12,21 @@
 
   <body>
     
-    <% if user_signed_in? %>
-      <%= link_to destroy_user_session_path, data: { confirm: '¿Estás seguro?', turbo_method: "delete" } do %>
-        <i class="fa-fa-trash"></i> Salir
-      <% end %>
-    <% end %>
+    
     
     <div class="main-container">
-      <% flash.each do |key, value| %>
-        <% if key.to_s == "notice" %>
-          <div class="<%= key.to_s %> alert"><%= value %></div>
+      <% if user_signed_in? %>
+        <%= link_to destroy_user_session_path, class: "log-out-link",data: { confirm: '¿Estás seguro?', turbo_method: "delete" } do %>
+          <i class="fa-fa-trash"></i> Cerrar Sesión
         <% end %>
       <% end %>
+      <div id="flash_messages">
+        <% flash.each do |key, value| %>
+          <div class="<%= key %> alert">
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
       <%= yield %>
     </div>
   </body>

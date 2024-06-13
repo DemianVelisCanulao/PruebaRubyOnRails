@@ -8,7 +8,13 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @project, notice: 'Tarea creada exitosamente.'
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append('flash_messages', partial: 'shared/flash_message', locals: { message: 'El campo no puede estar vacío.' })
+        end
+
+      end
     end
   end
 

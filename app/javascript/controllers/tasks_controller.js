@@ -1,11 +1,22 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+  validate(event) {
+    const title = this.titleTarget.value.trim();
+   
+    console.log("dasda");
+    if (title === "") {
+      alert("El campo título no puede estar vacío.");
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
 
   toggleStyle(event) {
     const checkbox = event.target;
     const titleInput = checkbox.closest("form").querySelector(".task-title");
-    console.log(titleInput)
+    
     if (titleInput) {
       if (checkbox.checked) {
         titleInput.classList.add("completed");

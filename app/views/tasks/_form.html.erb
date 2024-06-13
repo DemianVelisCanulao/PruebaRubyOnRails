@@ -1,7 +1,3 @@
-<%= link_to 'Volver', project_path(@project), class: 'home-link' %>
-<div id="flash_messages">
-  <!-- Los mensajes flash se agregarán aquí -->
-</div>
 <h1>Nueva tarea</h1>
 
 <%= form_with(model: [@project, @task], url: project_tasks_path(@project), data: {action: "submit->tasks#validate"}) do  |f| %>

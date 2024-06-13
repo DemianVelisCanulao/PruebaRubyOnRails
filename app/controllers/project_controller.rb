@@ -21,7 +21,8 @@ class ProjectController < ApplicationController
         if @projects.save
             redirect_to @projects, notice: 'Proyecto creado exitosamente.'
         else
-            render:new
+            flash.now[:error] = 'El campo título no puede estar vacío'
+            render :new, status: :unprocessable_entity
         end
     end
 
@@ -32,7 +33,8 @@ class ProjectController < ApplicationController
         if @project.update(project_params)
             redirect_to @project, notice: 'Proyecto actualizado exitosamente.'
         else
-            render:edit
+            flash.now[:error] = 'El campo título no puede estar vacío'
+            render :edit, status: :unprocessable_entity
         end
     end
 
